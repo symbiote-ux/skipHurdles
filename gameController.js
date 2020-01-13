@@ -11,11 +11,10 @@ const main = function() {
   canvas.height = 270;
   canvas.width = 480;
   const ctx = canvas.getContext('2d');
-  const box = new Component(30, 30, 'red', 10, 120);
-  const game = new Game(box,ctx);
+  const box = new Component(30, 30, 10, 120);
+  const game = new Game(box, ctx);
   attachEventListeners(game);
   setInterval(() => {
-    game.clear();
     game.update();
   }, 200);
 };
