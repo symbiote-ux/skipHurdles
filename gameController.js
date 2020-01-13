@@ -1,9 +1,16 @@
-const handleKeyPress = game => {
-  game.moveBox(event.keyCode);
+const handleKeyUp = game => {
+  game.keys[event.keyCode] = event.type == 'keydown';
+};
+
+const handleKeyDown = game => {
+  game.keys = game.keys || [];
+  game.keys[event.keyCode] = event.type == 'keydown';
+  game.moveBox(game.keys);
 };
 
 const attachEventListeners = game => {
-  document.body.onkeydown = handleKeyPress.bind(null, game);
+  document.body.onkeydown = handleKeyDown.bind(null, game);
+  document.body.onkeyup = handleKeyUp.bind(null, game);
 };
 
 const main = function() {
@@ -16,5 +23,5 @@ const main = function() {
   attachEventListeners(game);
   setInterval(() => {
     game.update();
-  }, 200);
+  }, 50);
 };

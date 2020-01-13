@@ -11,25 +11,22 @@ class Game {
   update() {
     this.box.clearRect(this.ctx);
     this.ctx.fillStyle = `rgb(${numR()},${numR()},${numR()})`;
+    // this.ctx.fillStyle = 'red';
     this.box.x += 1;
     this.box.fillRect(this.ctx);
   }
   moveBox(key) {
-    if (key == 37) {
+    if (key[37]) {
       this.box.moveLeft();
-      this.update();
     }
-    if (key == 39) {
+    if (key[39]) {
       this.box.moveRight();
-      this.update();
     }
-    if (key == 38) {
+    if (key[38]) {
       this.box.moveUp();
-      this.update();
     }
-    if (key == 40) {
+    if (key[40]) {
       this.box.moveDown();
-      this.update();
     }
   }
 }

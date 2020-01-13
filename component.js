@@ -17,15 +17,15 @@ class Component {
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
   moveLeft() {
-    this.x -= 1;
+    this.x -= 10;
   }
   moveRight() {
-    this.x += 1;
+    this.x += 5;
   }
   moveUp() {
-    this.y -= 1;
+    this.y -= 5;
   }
   moveDown() {
-    this.y += 1;
+    this.y += 5;
   }
 }
