@@ -1,16 +1,38 @@
-const handleKeyUp = game => {
-  game.keys[event.keyCode] = event.type == 'keydown';
+const drawFillRect = (game, ctx) => {
+  const {x, y, width, height} = game.boxDetails();
+  ctx.fillStyle = 'red';
+  ctx.fillRect(x, y, width, height);
 };
 
+const drawClearRect = (game, ctx) => {
+  const {prevX, prevY, width, height} = game.boxDetails();
+  ctx.clearRect(prevX, prevY, width, height);
+};
+
+const drawRect = (game, ctx) => {
+  drawClearRect(game, ctx);
+  game.update();
+  drawFillRect(game, ctx);
+};
 const handleKeyDown = game => {
-  game.keys = game.keys || [];
-  game.keys[event.keyCode] = event.type == 'keydown';
-  game.moveBox(game.keys);
+  switch (event.keyCode) {
+    case 37:
+      game.moveBox('left');
+      break;
+    case 39:
+      game.moveBox('right');
+      break;
+    case 38:
+      game.moveBox('up');
+      break;
+    case 40:
+      game.moveBox('down');
+      break;
+  }
 };
 
 const attachEventListeners = game => {
   document.body.onkeydown = handleKeyDown.bind(null, game);
-  document.body.onkeyup = handleKeyUp.bind(null, game);
 };
 
 const main = function() {
@@ -19,9 +41,10 @@ const main = function() {
   canvas.width = 480;
   const ctx = canvas.getContext('2d');
   const box = new Component(30, 30, 10, 120);
-  const game = new Game(box, ctx);
+  const game = new Game(box);
   attachEventListeners(game);
+
   setInterval(() => {
-    game.update();
+    drawRect(game, ctx);
   }, 50);
 };

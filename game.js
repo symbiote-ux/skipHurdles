@@ -4,29 +4,16 @@ const numR = () => {
 };
 
 class Game {
-  constructor(box, ctx) {
+  constructor(box) {
     this.box = box;
-    this.ctx = ctx;
   }
   update() {
-    this.box.clearRect(this.ctx);
-    this.ctx.fillStyle = `rgb(${numR()},${numR()},${numR()})`;
-    // this.ctx.fillStyle = 'red';
-    this.box.x += 1;
-    this.box.fillRect(this.ctx);
+    return this.box.update();
   }
-  moveBox(key) {
-    if (key[37]) {
-      this.box.moveLeft();
-    }
-    if (key[39]) {
-      this.box.moveRight();
-    }
-    if (key[38]) {
-      this.box.moveUp();
-    }
-    if (key[40]) {
-      this.box.moveDown();
-    }
+  moveBox(dir) {
+    this.box[dir]();
+  }
+  boxDetails() {
+    return this.box.details();
   }
 }

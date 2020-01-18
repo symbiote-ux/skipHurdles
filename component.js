@@ -8,24 +8,30 @@ class Component {
     this.prevX = 0;
     this.prevY = 0;
   }
-  clearRect(ctx) {
-    ctx.clearRect(this.prevX, this.prevY, this.width, this.height);
-  }
-  fillRect(ctx) {
-    this.prevX = this.x;
-    this.prevY = this.y;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-  }
-  moveLeft() {
+  left() {
     this.x -= 10;
   }
-  moveRight() {
+  right() {
     this.x += 5;
   }
-  moveUp() {
+  up() {
     this.y -= 5;
   }
-  moveDown() {
+  down() {
     this.y += 5;
+  }
+  details() {
+    return {
+      prevX: this.prevX,
+      prevY: this.prevY,
+      width: this.width,
+      height: this.height,
+      x: this.x,
+      y: this.y
+    };
+  }
+  update() {
+    this.prevX = this.x;
+    this.prevY = this.y;
   }
 }
