@@ -1,36 +1,39 @@
 'use strict';
 class Component {
-  constructor(width, height, x, y) {
+  constructor(width, height, color, x, y) {
     this.width = width;
     this.height = height;
     this.x = x;
     this.y = y;
+    this.color = color;
     this.prevX = 0;
     this.prevY = 0;
   }
-  left() {
+  moveLeft() {
     this.x -= 10;
   }
-  right() {
+  moveRight() {
     this.x += 5;
   }
-  up() {
+  moveUp() {
     this.y -= 5;
   }
-  down() {
+  moveDown() {
     this.y += 5;
   }
-  details() {
+  getDetails() {
     return {
       prevX: this.prevX,
       prevY: this.prevY,
       width: this.width,
       height: this.height,
+      color: this.color,
       x: this.x,
       y: this.y
     };
   }
-  update() {
+  moveHorizontally(delta) {
+    this.x += delta;
     this.prevX = this.x;
     this.prevY = this.y;
   }
