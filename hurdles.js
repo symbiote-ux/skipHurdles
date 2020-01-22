@@ -1,7 +1,9 @@
 'use strict';
+const getPosition = () => (Math.floor(Math.random() * 2) ? 0 : 120);
+
 class Hurdles {
-  constructor(tower1, tower2) {
-    this.hurdles = [tower1, tower2];
+  constructor(tower) {
+    this.hurdles = [tower];
   }
   get details() {
     const details = [];
@@ -11,8 +13,13 @@ class Hurdles {
     return details;
   }
   update() {
+    const firstHurdle = this.hurdles[0];
+    if (firstHurdle.xCord === 0) {
+      this.hurdles.shift();
+    }
+    console.log(this.hurdles);
     this.hurdles.forEach(tower => {
-      tower.moveHorizontally(-1);
+      tower.moveHorizontally(-3);
     });
   }
   crash({boxLeft, boxRight, boxBottom, boxTop}) {
@@ -20,5 +27,9 @@ class Hurdles {
       return tower.crashWith({boxLeft, boxRight, boxBottom, boxTop});
     });
     return result;
+  }
+  generateNewTower() {
+    const tower = new Tower(10, 150, 'green', 480, getPosition());
+    this.hurdles.push(tower);
   }
 }

@@ -57,9 +57,8 @@ const main = function() {
   canvas.width = 480;
   const ctx = canvas.getContext('2d');
   const box = new Box(30, 30, 'red', 10, 120);
-  const tower1 = new Tower(10, 200, 'green', 200, 120);
-  const tower2 = new Tower(10, 200, 'green', 420, 120);
-  const hurdles = new Hurdles(tower1, tower2);
+  const tower = new Tower(10, 150, 'green', 480, 120);
+  const hurdles = new Hurdles(tower);
   const game = new Game(box, hurdles);
   attachEventListeners(game);
 
@@ -69,5 +68,8 @@ const main = function() {
     if (game.hasBoxCrash()) {
       stopGame(interval);
     }
-  }, 50);
+  }, 30);
+  setInterval(() => {
+    game.insertTower();
+  }, 1500);
 };

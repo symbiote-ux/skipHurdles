@@ -8,16 +8,16 @@ class Box {
     this.color = color;
   }
   moveLeft() {
-    this.x -= 10;
+    this.x -= 5;
   }
   moveRight() {
     this.x += 5;
   }
   moveUp() {
-    this.y -= 5;
+    this.y -= 8;
   }
   moveDown() {
-    this.y += 5;
+    this.y += 8;
   }
   getDetails() {
     return {

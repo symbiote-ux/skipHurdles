@@ -31,4 +31,7 @@ class Tower {
       boxRight >= towerLeft;
     return hasCrashed;
   }
+  get xCord() {
+    return this.x;
+  }
 }

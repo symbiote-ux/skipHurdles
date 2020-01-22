@@ -5,7 +5,6 @@ class Game {
     this.hurdles = hurdles;
   }
   update() {
-    this.box.moveHorizontally(1);
     this.hurdles.update();
   }
   moveBox(dir) {
@@ -24,5 +23,8 @@ class Game {
     const boxTop = y;
     const boxBottom = y + height;
     return this.hurdles.crash({boxLeft, boxBottom, boxRight, boxTop});
+  }
+  insertTower() {
+    this.hurdles.generateNewTower();
   }
 }
