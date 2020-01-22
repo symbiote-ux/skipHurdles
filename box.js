@@ -1,13 +1,11 @@
 'use strict';
-class Component {
+class Box {
   constructor(width, height, color, x, y) {
     this.width = width;
     this.height = height;
     this.x = x;
     this.y = y;
     this.color = color;
-    this.prevX = 0;
-    this.prevY = 0;
   }
   moveLeft() {
     this.x -= 10;
@@ -23,8 +21,6 @@ class Component {
   }
   getDetails() {
     return {
-      prevX: this.prevX,
-      prevY: this.prevY,
       width: this.width,
       height: this.height,
       color: this.color,
@@ -34,7 +30,5 @@ class Component {
   }
   moveHorizontally(delta) {
     this.x += delta;
-    this.prevX = this.x;
-    this.prevY = this.y;
   }
 }

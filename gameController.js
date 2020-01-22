@@ -1,12 +1,16 @@
 const stopGame = interval => {
+  const msg = document.getElementById('msg');
+  msg.innerText = 'Game Over';
   clearInterval(interval);
-  // document.write('Game over');
 };
 
-const drawHurdle = (game, ctx) => {
-  const {x, y, width, height, color} = game.towerDetails;
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y, width, height);
+const drawTower = (game, ctx) => {
+  const hurdles = game.towerDetails;
+  hurdles.forEach(tower => {
+    const {tX, tY, towerWidth, towerHeight, towerColor} = tower;
+    ctx.fillStyle = towerColor;
+    ctx.fillRect(tX, tY, towerWidth, towerHeight);
+  });
 };
 
 const drawFillRect = (game, ctx) => {
@@ -21,11 +25,10 @@ const clearScreen = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-const drawRect = (game, ctx) => {
+const drawGame = (game, ctx) => {
   clearScreen();
-  game.update();
   drawFillRect(game, ctx);
-  drawHurdle(game, ctx);
+  drawTower(game, ctx);
 };
 
 const handleKeyDown = game => {
@@ -53,14 +56,17 @@ const main = function() {
   canvas.height = 270;
   canvas.width = 480;
   const ctx = canvas.getContext('2d');
-  const box = new Component(30, 30, 'red', 10, 120);
-  const tower = new Component(10, 200, 'green', 300, 120);
-  const game = new Game(box, tower);
+  const box = new Box(30, 30, 'red', 10, 120);
+  const tower1 = new Tower(10, 200, 'green', 200, 120);
+  const tower2 = new Tower(10, 200, 'green', 420, 120);
+  const hurdles = new Hurdles(tower1, tower2);
+  const game = new Game(box, hurdles);
   attachEventListeners(game);
 
   const interval = setInterval(() => {
-    drawRect(game, ctx);
-    if (game.crashWith()) {
+    drawGame(game, ctx);
+    game.update();
+    if (game.hasBoxCrash()) {
       stopGame(interval);
     }
   }, 50);
