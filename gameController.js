@@ -6,7 +6,7 @@ const stopGame = interval => {
 
 const drawScore = score => {
   const scoreTab = document.getElementById('scoreBox');
-  scoreTab.innerText = score; 
+  scoreTab.innerText = `Score: ${score}`;
 };
 
 const drawTower = (hurdles, ctx) => {
@@ -76,6 +76,7 @@ const main = function() {
     }
   }, 30);
   setInterval(() => {
+    game.countScore();
     game.insertTower();
   }, 1500);
 };

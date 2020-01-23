@@ -7,7 +7,6 @@ class Game {
   }
   update() {
     this.hurdles.update();
-    this.score.count(1);
   }
   moveUp() {
     this.box.moveUp();
@@ -42,5 +41,7 @@ class Game {
   isOver() {
     return this.hasBoxCrash();
   }
-  count;
+  countScore() {
+    this.score.count(1);
+  }
 }
