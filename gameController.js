@@ -4,8 +4,12 @@ const stopGame = interval => {
   clearInterval(interval);
 };
 
-const drawTower = (game, ctx) => {
-  const hurdles = game.towerDetails;
+const drawScore = score => {
+  const scoreTab = document.getElementById('scoreBox');
+  scoreTab.innerText = score; 
+};
+
+const drawTower = (hurdles, ctx) => {
   hurdles.forEach(tower => {
     const {tX, tY, towerWidth, towerHeight, towerColor} = tower;
     ctx.fillStyle = towerColor;
@@ -13,8 +17,8 @@ const drawTower = (game, ctx) => {
   });
 };
 
-const drawFillRect = (game, ctx) => {
-  const {x, y, width, height, color} = game.boxDetails;
+const drawFillRect = (box, ctx) => {
+  const {x, y, width, height, color} = box;
   ctx.fillStyle = color;
   ctx.fillRect(x, y, width, height);
 };
@@ -26,24 +30,26 @@ const clearScreen = () => {
 };
 
 const drawGame = (game, ctx) => {
+  const {boxDetails, towerDetails, score} = game.status();
   clearScreen();
-  drawFillRect(game, ctx);
-  drawTower(game, ctx);
+  drawFillRect(boxDetails, ctx);
+  drawTower(towerDetails, ctx);
+  drawScore(score);
 };
 
 const handleKeyDown = game => {
   switch (event.keyCode) {
     case 37:
-      game.moveBox('moveLeft');
+      game.moveLeft();
       break;
     case 38:
-      game.moveBox('moveUp');
+      game.moveUp();
       break;
     case 39:
-      game.moveBox('moveRight');
+      game.moveRight();
       break;
     case 40:
-      game.moveBox('moveDown');
+      game.moveDown();
   }
 };
 
@@ -62,11 +68,11 @@ const main = function() {
   const game = new Game(box, hurdles);
   attachEventListeners(game);
 
-  const interval = setInterval(() => {
+  const gameInterval = setInterval(() => {
     drawGame(game, ctx);
     game.update();
-    if (game.hasBoxCrash()) {
-      stopGame(interval);
+    if (game.isOver()) {
+      stopGame(gameInterval);
     }
   }, 30);
   setInterval(() => {

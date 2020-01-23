@@ -5,7 +5,7 @@ class Hurdles {
   constructor(tower) {
     this.hurdles = [tower];
   }
-  get details() {
+ details() {
     const details = [];
     this.hurdles.map(tower => {
       details.push(tower.getDetails());
@@ -17,7 +17,6 @@ class Hurdles {
     if (firstHurdle.xCord === 0) {
       this.hurdles.shift();
     }
-    console.log(this.hurdles);
     this.hurdles.forEach(tower => {
       tower.moveHorizontally(-3);
     });

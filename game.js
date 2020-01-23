@@ -3,21 +3,33 @@ class Game {
   constructor(box, hurdles) {
     this.box = box;
     this.hurdles = hurdles;
+    this.score = new Score();
   }
   update() {
     this.hurdles.update();
+    this.score.count(1);
   }
-  moveBox(dir) {
-    this.box[dir]();
+  moveUp() {
+    this.box.moveUp();
   }
-  get boxDetails() {
-    return this.box.getDetails();
+  moveDown() {
+    this.box.moveDown();
   }
-  get towerDetails() {
-    return this.hurdles.details;
+  moveRight() {
+    this.box.moveRight();
+  }
+  moveLeft() {
+    this.box.moveLeft();
+  }
+  status() {
+    return {
+      boxDetails: this.box.getDetails(),
+      towerDetails: this.hurdles.details(),
+      score: this.score.currentScore()
+    };
   }
   hasBoxCrash() {
-    const {x, y, width, height} = this.boxDetails;
+    const {x, y, width, height} = this.box.getDetails();
     const boxLeft = x;
     const boxRight = x + width;
     const boxTop = y;
@@ -27,4 +39,8 @@ class Game {
   insertTower() {
     this.hurdles.generateNewTower();
   }
+  isOver() {
+    return this.hasBoxCrash();
+  }
+  count;
 }
