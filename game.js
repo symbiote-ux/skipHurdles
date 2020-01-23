@@ -7,6 +7,7 @@ class Game {
   }
   update() {
     this.hurdles.update();
+    this.box.fallDown();
   }
   moveUp() {
     this.box.moveUp();

@@ -6,18 +6,19 @@ class Box {
     this.x = x;
     this.y = y;
     this.color = color;
+    this.gravity = 1;
   }
   moveLeft() {
-    this.x -= 5;
+    if (this.x > 0) this.x -= 5;
   }
   moveRight() {
-    this.x += 5;
+    if (this.x < 450) this.x += 5;
   }
   moveUp() {
-    this.y -= 8;
+    if (this.y > 3) this.y -= 8;
   }
-  moveDown() {
-    this.y += 8;
+  moveDown(weight = 8) {
+    if (this.y < 240) this.y += weight;
   }
   getDetails() {
     return {
@@ -30,5 +31,8 @@ class Box {
   }
   moveHorizontally(delta) {
     this.x += delta;
+  }
+  fallDown() {
+    this.moveDown(this.gravity);
   }
 }
