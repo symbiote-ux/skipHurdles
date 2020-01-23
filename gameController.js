@@ -77,6 +77,6 @@ const main = function() {
   }, 30);
   setInterval(() => {
     game.countScore();
-    // game.insertTower();
+    game.insertTower();
   }, 1200);
 };
