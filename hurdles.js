@@ -5,7 +5,7 @@ class Hurdles {
   constructor(tower) {
     this.hurdles = [tower];
   }
- details() {
+  details() {
     const details = [];
     this.hurdles.map(tower => {
       details.push(tower.getDetails());

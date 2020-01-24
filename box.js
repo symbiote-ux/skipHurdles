@@ -6,7 +6,7 @@ class Box {
     this.x = x;
     this.y = y;
     this.color = color;
-    this.gravity = 1.5;
+    this.gravity = 1;
   }
   moveLeft() {
     if (this.x > 0) this.x -= 5;
